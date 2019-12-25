@@ -8,7 +8,8 @@ import (
 	"fmt"
 	"github.com/MufidJamaluddin/simplewebgo/config"
 	"github.com/MufidJamaluddin/simplewebgo/handler"
-	"github.com/MufidJamaluddin/simplewebgo/module/profile"
+	profile "github.com/MufidJamaluddin/simplewebgo/module/profile"
+	dashboard "github.com/MufidJamaluddin/simplewebgo/module/dashboard"
 	"github.com/MufidJamaluddin/simplewebgo/util"
 	"github.com/MufidJamaluddin/simplewebgo/ui"
 	"github.com/justinas/alice"
@@ -29,7 +30,10 @@ func main() {
 	}
 
 	profileModule := &util.Module{Path: "/api/profile", Handler: &_handler}
+	dashboardModule := &util.Module{Path: "/api/dashboard", Handler: &_handler}
+
 	profile.RegisterRoute(profileModule)
+	dashboard.RegisterRoute(dashboardModule)
 
 	http.Handle("/", _handler.ThenFunc(ui.IndexHandler))
 
